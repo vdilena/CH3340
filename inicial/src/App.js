@@ -49,14 +49,12 @@ class App extends Component {
     getCards() {
         return this.state.cards.map((card, index) => {
             return (
-                <div className="card">
-                    < CardStateFul 
-                        key={card.id} 
-                        card={card} 
-                        handleEditCard = {() => this.editCard()}
-                        handleDeleteCard = {() => this.deleteCard(card.id)}
-                    />
-                </div>
+                < CardStateFul 
+                    key={card.id} 
+                    card={card} 
+                    handleEditCard = {() => this.editCard()}
+                    handleDeleteCard = {() => this.deleteCard(card.id)}
+                />
             )
         });
     }

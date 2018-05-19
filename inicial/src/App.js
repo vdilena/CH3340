@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
-import Card from './Card'
+//import Card from './Card'
+import CardStateFul from './CardStateFul'
 
 class App extends Component {
 
     static defaultProps = {
         name: 'Jose'
     }
+
+    titleInput = ''
+    descriptionInput = ''
 
     state = {
         title: 'Camada #3340',
@@ -46,14 +50,12 @@ class App extends Component {
         return this.state.cards.map((card, index) => {
             return (
                 <div className="card">
-                    < Card 
-                        card={card} 
+                    < CardStateFul 
                         key={card.id} 
+                        card={card} 
+                        handleEditCard = {() => this.editCard()}
+                        handleDeleteCard = {() => this.deleteCard(card.id)}
                     />
-                    <div className="actions">
-                        <button onClick={this.editCard}>Edit</button>
-                        <button onClick={() => this.deleteCard(card.id)}>Delete</button>
-                    </div>
                 </div>
             )
         });
@@ -85,6 +87,25 @@ class App extends Component {
             <button className="addCard" onClick={() => this.addCard()}>Add Card</button>
         );
     }
+    
+    changeTitle (title) {
+
+        this.titleInput = title
+        console.log('changeTitle: ' + this.titleInput)
+
+        /*this.setState({
+            title: newTitle
+        })*/
+    }
+
+    changeDescription (description) {
+
+        this.descriptionInput = description
+        console.log('changeDescription: ' + this.descriptionInput)
+        /*this.setState({
+            title: newTitle
+        })*/
+    }
 
     render() {
         //React.createElement('div', {className:'App'}, 'head')
@@ -96,6 +117,8 @@ class App extends Component {
                     {this.getCards()}
                 </div>
                 {this.addNewCardButton()}
+                <input onChange = {(event) => this.changeTitle(event.target.value)} />
+                <input onChange = {(event) => this.changeDescription(event.target.value)} />
             </div>
         );
     }

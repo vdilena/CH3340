@@ -2,10 +2,6 @@ html, body, #root {
   height: 100%;
 }
 
-.App {
-  text-align: center;
-}
-
 .container {
   display: flex;
   margin: 10px;
@@ -13,22 +9,27 @@ html, body, #root {
   flex-wrap: wrap;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .card {
   height: 200px;
   width: 250px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: springgreen;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.card .title { }
-
 .card .description {
-  flex-grow: 1;
+  flex-grow: 1
 }
 
 .card .actions {
+
   margin: 15px;
   width: 100%;
   display: flex;
@@ -37,6 +38,7 @@ html, body, #root {
 }
 
 .content {
+
   display: flex;
   flex-direction: row;
   height: calc(100% - 56px);
@@ -53,6 +55,7 @@ html, body, #root {
 .form input {
   margin-bottom: 15px;
 }
+
 
 .app-header {
   height: 75px;

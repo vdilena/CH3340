@@ -91,18 +91,18 @@ class App extends Component {
         this.titleInput = title
         console.log('changeTitle: ' + this.titleInput)
 
-        /*this.setState({
-            title: newTitle
-        })*/
+        this.setState({
+            title: this.titleInput
+        })
     }
 
     changeDescription (description) {
 
         this.descriptionInput = description
         console.log('changeDescription: ' + this.descriptionInput)
-        /*this.setState({
-            title: newTitle
-        })*/
+        this.setState({
+            title: this.descriptionInput
+        })
     }
 
     render() {

@@ -18,7 +18,7 @@ html, body, #root {
 .card {
   height: 200px;
   width: 250px;
-  box-shadow: springgreen;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,4 +63,9 @@ html, body, #root {
   flex-direction: row;
   background-color: #fafafb;
   border-bottom: 1px solid green;
+}
+
+.terms-content {
+
+  flex-direction: column;
 }

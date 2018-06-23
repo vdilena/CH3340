@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import App from './App';
 import CardManagement from './CardManagement';
 import TermAndCondition from './TermAndCondition';
+import CardSave from './CardSave';
 
 const Avatar = (props) => {
 
@@ -18,6 +19,7 @@ const Avatar = (props) => {
                     <div className="app-links">
                         <div><Link to = {'/'}>Home</Link></div>
                         <div><Link to='/terms/1'>Terms</Link></div>
+                        <div><Link to = '/saveCard'>Save Card</Link></div>
                     </div>
                 </div>
                 <div>
@@ -31,6 +33,7 @@ const Avatar = (props) => {
                                                 params = {p.match.params}
                                               />}
                         />
+                        <Route path = '/saveCard/:cardId?' component = {CardSave}></Route>
                     </Switch>
                 </div>
             </div>

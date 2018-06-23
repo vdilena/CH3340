@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {addCard} from './actions'
 
 class CardSave extends Component {
 
@@ -41,6 +43,12 @@ class CardSave extends Component {
         this.setState({
           descriptionInput: description
         })
+    }
+
+    saveReduxCards() {
+
+        this.props.addCard(this.state.titleInput, this.state.descriptionInput)
+        this.props.history.push("/")
     }
 
     saveRemoteCard() {
@@ -109,7 +117,7 @@ class CardSave extends Component {
               onChange={(event) => this.addDescription(event.target.value)} 
               ref={(input) => this.descriptionInput = input} 
               value = {this.state.descriptionInput} />
-            <button onClick={() => this.saveRemoteCard()}>Save Card</button>
+            <button onClick={() => this.saveReduxCards()}>Save Card</button>
           </div>
         )
     
@@ -126,4 +134,10 @@ class CardSave extends Component {
     }
 }
 
-export default CardSave
+const mapDispatchToProps = (dispatch) => ({
+    addCard: (title, description) => dispatch(addCard(title, description))
+})
+
+export default connect(
+    null, mapDispatchToProps
+) (CardSave)

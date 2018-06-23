@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Card from './Card'
 import axios from 'axios'
+import {connect} from 'react-redux'
 
 class CardManagement extends Component {
 
-    constructor() {
+    constructor(props) {
 
-        super()
+        super(props)
         this.getRemoteCards()
       }
     
@@ -37,7 +38,7 @@ class CardManagement extends Component {
     
       getCards () {
     
-          return this.state.cards.map((card, index) => {
+          return this.props.reduxCards.map((card, index) => {
             return (
               <Card 
                 key = {card.id}
@@ -169,4 +170,10 @@ class CardManagement extends Component {
 
 }
 
-export default CardManagement
+const mapStateToProps = (state) => ({
+    reduxCards: state.cardReducer
+})
+
+export default connect(
+  mapStateToProps
+)(CardManagement)

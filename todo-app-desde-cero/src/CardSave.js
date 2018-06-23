@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {addCard} from './actions'
+import {addCard, editCardById} from './actions'
 
 class CardSave extends Component {
 
@@ -26,6 +26,25 @@ class CardSave extends Component {
         }
     }
 
+    componentDidMount() {
+
+        let cardId = this.props.match.params.cardId
+        this.setReduxCardIfExist(cardId)
+    }
+
+    setReduxCardIfExist (cardId) {
+
+        if(cardId) {
+
+            let card = this.props.reduxCards.filter(card => card.id === parseInt(cardId))[0]
+
+            this.setState({
+                titleInput : card.title,
+                descriptionInput : card.description
+            })
+        }
+    }
+
     state =  {
         titleInput : '',
         descriptionInput : ''
@@ -47,7 +66,15 @@ class CardSave extends Component {
 
     saveReduxCards() {
 
-        this.props.addCard(this.state.titleInput, this.state.descriptionInput)
+        let cardId = this.props.match.params.cardId
+        console.log(cardId)
+
+        if(cardId) {
+            this.props.editCardById(cardId, this.state.titleInput, this.state.descriptionInput)
+        } else {
+            this.props.addCard(this.state.titleInput, this.state.descriptionInput)
+        }
+
         this.props.history.push("/")
     }
 
@@ -134,10 +161,15 @@ class CardSave extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    reduxCards: state.cardReducer
+})
+
 const mapDispatchToProps = (dispatch) => ({
-    addCard: (title, description) => dispatch(addCard(title, description))
+    addCard: (title, description) => dispatch(addCard(title, description)),
+    editCardById: (cardId, title, description) => dispatch(editCardById(cardId, title, description))
 })
 
 export default connect(
-    null, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps
 ) (CardSave)

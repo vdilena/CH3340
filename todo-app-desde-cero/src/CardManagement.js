@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Card from './Card'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {deleteCardById} from './actions'
 
 class CardManagement extends Component {
 
@@ -44,7 +45,7 @@ class CardManagement extends Component {
                 key = {card.id}
                 card = {card}
                 handleEditCard = {() => this.editCard(card.id)}
-                handleDeleteCard = {() => this.deleteRemoteCard(card.id)}
+                handleDeleteCard = {() => this.deleteReduxCardById(card.id)}
               />
             )
         })
@@ -157,6 +158,10 @@ class CardManagement extends Component {
             })
       }
 
+      deleteReduxCardById (cardId) {
+        this.props.deleteCardById(cardId)
+      }
+
     render () {
         return (
 
@@ -174,6 +179,11 @@ const mapStateToProps = (state) => ({
     reduxCards: state.cardReducer
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  deleteCardById: cardId => dispatch(deleteCardById(cardId))
+})
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(CardManagement)

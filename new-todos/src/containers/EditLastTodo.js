@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {editLastTodo} from '../actions'
+import {editTodoById} from '../actions'
 
 class EditLastTodo extends Component {
 
     inputTodoName = ''
+    inputTodoId = ''
     inputRef
+    inputRefId
 
     todoNameHandler = name => {
         this.inputTodoName = name
@@ -13,11 +15,19 @@ class EditLastTodo extends Component {
 
     editTodoHandler = () => {
 
-        if(!this.inputRef.value.trim()) {
+        if(!this.inputRef.value.trim() 
+            && !this.inputRefId.value.trim()) {
             return
         }
-        this.props.editLastTodo(this.inputTodoName)
+        //console.log(this.inputTodoName, this.inputTodoId)
+        this.props.editTodoById(this.inputTodoName, this.inputTodoId)
         this.inputRef.value = ''
+        this.inputRefId.value = ''
+    }
+
+    todoIdHandler = id => {
+
+        this.inputTodoId = id
     }
 
     render() {
@@ -25,11 +35,15 @@ class EditLastTodo extends Component {
         return (
 
             <div>
-                <input
+                <input className = "inputIdEditTask"
+                    onChange = {(event) => this.todoIdHandler(event.target.value)} 
+                    ref = {(input) => this.inputRefId = input}
+                />
+                <input className = "inputNameEditTask"
                     onChange = {(event) => this.todoNameHandler(event.target.value)}
                     ref = {(input) => this.inputRef = input}
                 />
-                <button onClick = {() => this.editTodoHandler()}>Edit Last Todo</button>
+                <button onClick = {() => this.editTodoHandler()}>Edit Todo</button>
             </div>
         )
     }
@@ -37,7 +51,7 @@ class EditLastTodo extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    editLastTodo: (text) => dispatch(editLastTodo(text)) 
+    editTodoById: (text, id) => dispatch(editTodoById(text, id)) 
 })
 
 export default connect (

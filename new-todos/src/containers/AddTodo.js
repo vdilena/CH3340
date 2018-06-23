@@ -26,12 +26,16 @@ class AddTodo extends Component {
 
       return (
         <div>
-            <input 
-              onChange = {(event) => this.todoNameHandler(event.target.value)} 
-              ref = {(input) => this.inputRef = input}
-            />
-            <button onClick= {() => this.addTodoHandler()}>Add Todo</button>
-            <button onClick= {() => this.addRemoveLastTodoHandler()}>Remove Last Todo</button>
+            <div className = "addContent">
+              <input className = "inputAddTodo"
+                onChange = {(event) => this.todoNameHandler(event.target.value)} 
+                ref = {(input) => this.inputRef = input}
+              />
+              <button onClick= {() => this.addTodoHandler()}>Add Todo</button>
+            </div>
+            <div className = "addContent">
+              <button onClick= {() => this.addRemoveLastTodoHandler()}>Remove Last Todo</button>
+            </div>
         </div>
       )
   }

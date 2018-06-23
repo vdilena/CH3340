@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { removeTodoById } from '../actions';
+import { removeTodoById, moveTaskTodoToInProgress } from '../actions';
 
 const TodoList = (props) => (
-  <ul>
+  <ul className = "containerTaskList">
+    <li className = "containerTitle">To Do</li>
     {props.todos.map(todo =>
-       <li key={todo.id}>
-        <span onClick = {() => props.removeTodoById(todo.id)}>{todo.text}</span>
+       <li className = "taskItem" key={todo.id}>
+        <div onClick = {() => props.removeTodoById(todo.id)}>{todo.id} - {todo.text}</div>
+        <div><button onClick= {() => props.moveToInProgress(todo)}>Move In Progress</button></div>
       </li>
     )}
   </ul>
@@ -17,7 +19,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchtoProps = (dispatch) => ({
-  removeTodoById: (todoId) => dispatch(removeTodoById(todoId))
+  removeTodoById: (todoId) => dispatch(removeTodoById(todoId)),
+  moveToInProgress: (task) => dispatch(moveTaskTodoToInProgress(task) )
 })
 
 export default connect(

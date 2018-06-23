@@ -1,0 +1,78 @@
+html, body {
+    height: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+.container {
+    display: flex;
+    margin: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.App {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 56px);
+    height: 100%;
+}
+
+.left-content {
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+    width: 400px;
+    height: 100%;
+}
+
+.addContent {
+    margin-bottom: 10px;
+}
+
+.containerTitle {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.taskItem {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid cyan;
+    padding: 5px;
+    text-align: center;
+    height: 120px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.taskItem div {
+    height: 100%;
+}
+
+.containerTaskList {
+    width: 200px;
+}
+
+.inputAddTodo {
+	width: 270px;		
+}
+
+.inputIdEditTask {
+	width: 50px;		
+}
+
+.inputNameEditTask {
+    width: 215px;
+}

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Card from './Card'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {deleteCardById} from './actions'
+import {deleteRemoteCard, cardList} from './actions'
 
 class CardManagement extends Component {
 
@@ -10,8 +10,12 @@ class CardManagement extends Component {
 
         super(props)
         this.getRemoteCards()
-      }
-    
+    }
+
+    componentDidMount() {
+
+      this.props.retrievedCardList()
+    }
      titleInput = ''
      descriptionInput = ''
     
@@ -180,7 +184,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteCardById: cardId => dispatch(deleteCardById(cardId))
+  deleteCardById: cardId => dispatch(deleteRemoteCard(cardId)),
+  retrievedCardList: () => dispatch(cardList())
 })
 
 export default connect(

@@ -1,0 +1,50 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "Juan",
+      "products": [
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "LG",
+      "stock": 200,
+      "category": 1
+    },
+    {
+      "id": 2,
+      "name": "Noblex",
+      "stock": 100,
+      "category": 1
+    },
+    {
+      "id": 3,
+      "name": "Sony",
+      "stock": 500,
+      "category": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Televisor"
+    },
+    {
+      "id": 2,
+      "name": "Heladera"
+    },
+    {
+      "id": 3,
+      "name": "Lavarropa"
+    }
+  ]
+}

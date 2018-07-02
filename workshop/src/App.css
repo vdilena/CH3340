@@ -1,0 +1,66 @@
+html, body, #root {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  margin: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.itemBox {
+  height: 200px;
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .description {
+  flex-grow: 1
+}
+
+.card .actions {
+
+  margin: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.content {
+
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 56px);
+}
+
+.form {
+  padding: 10px;
+  width: 350px;
+  border-right: 1px solid green;
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  margin-bottom: 15px;
+}
+
+
+.app-header {
+  height: 75px;
+  width: 100%;
+  flex-direction: row;
+  background-color: #fafafb;
+  border-bottom: 1px solid green;
+}

@@ -4,14 +4,18 @@ import axios from 'axios'
 
 class ProductManagement extends Component {
 
-  constructor() {
+  constructor(props) {
 
-    super()
+    super(props)
+    this.getRemoteCustomers()
     this.getRemoteProducts()
   }
 
   state = { 
-    products: []
+    products: [],
+    productsLinkedWithProducts : [],
+    customers: [], 
+    isProductsByCustomer : false
   }
 
   editProduct(productId) {
@@ -29,6 +33,33 @@ class ProductManagement extends Component {
     )
   }
 
+  saleProductToCustomer(product, customerId) {
+
+    let customersByProduct = []
+
+    if(product.customers) {
+
+      product.customers.forEach(element => {
+        customersByProduct  = [...product.customers, { id: customerId} ]
+      })
+    } else {
+
+      customersByProduct = [{ id: customerId}]
+    }
+
+    product.customers = customersByProduct
+
+    axios
+        .put(`http://localhost:4000/products/${product.id}`,product)
+        .then(response => {
+  
+          this.props.history.push("/")
+        })
+        .catch(error => {
+          console.log(error)
+        })
+  }
+
   getProducts () {
 
       return this.state.products.map((product, index) => {
@@ -36,8 +67,11 @@ class ProductManagement extends Component {
           <Product 
             key = {product.id}
             product = {product}
+            customers = {this.state.customers}
+            isProductsByCustomer = {this.state.isProductsByCustomer}
             handleEditProduct = {() => this.editProduct(product.id)}
             handleDeleteProduct = {() => this.deleteRemoteProduct(product.id)}
+            handleProductSale = {(customerId) => this.saleProductToCustomer(product, customerId)}
           />
         )
     })
@@ -48,10 +82,40 @@ class ProductManagement extends Component {
     axios
       .get("http://localhost:4000/products")
       .then(response => {
+        
         const {data} = response
+        let productsToShow = data
+
+        if(this.props.match.params.customerId) {
+
+         axios
+            .get(`http://localhost:4000/customers/${this.props.match.params.customerId}`)
+            .then(response => {
+              
+              const {data} = response
+              let productsByCustomer = productsToShow.filter(productToShow => {
+
+                if(data.products.filter(product => product.id === productToShow.id).length > 0)
+                  return productToShow
+
+                return null
+              })
+
+              this.setState({
+                products:  productsByCustomer,
+                isProductsByCustomer: true
+              })
+
+              
+            })
+            .catch(error => {
+              console.log(error)
+            })
+
+        }
 
         this.setState({
-          products: data
+          products:  productsToShow
         })
       })
       .catch(error => {
@@ -59,13 +123,16 @@ class ProductManagement extends Component {
       })
   }
 
-  getRemoteProduct(productId) {
+  getRemoteCustomers() {
 
     axios
-      .get(`http://localhost:4000/products/${productId}`)
+      .get("http://localhost:4000/customers")
       .then(response => {
-          const {data} = response
-          console.log(data)
+        const {data} = response
+
+        this.setState({
+          customers:  data
+        })
       })
       .catch(error => {
         console.log(error)

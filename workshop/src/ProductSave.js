@@ -90,7 +90,7 @@ import axios from 'axios'
 				  .put(`http://localhost:4000/products/${productId}`, product)
 				  .then(response => {
 		
-						this.props.history.push("/")
+						this.props.history.push("/products")
 				  })
 				  .catch(error => {
 					console.log(error)
@@ -102,7 +102,7 @@ import axios from 'axios'
 				  .post("http://localhost:4000/products",product)
 				  .then(response => {
 		
-						this.props.history.push("/")
+						this.props.history.push("/products")
 				  })
 				  .catch(error => {
 					console.log(error)
@@ -122,7 +122,7 @@ import axios from 'axios'
 						<input placeholder = "Stock" 
 							onChange={(event) => this.addStock(event.target.value)} value={this.state.stockInput} />
 						<select value={this.state.categorySelect}>
-							<option value=''>-- Elija una Opcion --</option>
+							<option value=''>-- Choose an Option --</option>
 							{this.getCategories()}
 						</select>
 						<button onClick={() => this.saveProduct()}>Save Product</button>

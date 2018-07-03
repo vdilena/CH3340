@@ -18,6 +18,11 @@ class CustomerManagement extends Component {
     this.props.history.push(`/saveCustomer/${customerId}`)
   }
 
+  viewProducts(customerId) {
+
+    this.props.history.push(`/products/${customerId}`)
+  }
+
   deleteCustomer(customerId) {
 
     let customersSinEliminada = this.state.customers.filter(customer => customer.id !== customerId)
@@ -38,6 +43,7 @@ class CustomerManagement extends Component {
             customer = {customer}
             handleEditCustomer = {() => this.editCustomer(customer.id)}
             handleDeleteCustomer = {() => this.deleteRemoteCustomer(customer.id)}
+            handleViewProducts = {() => this.viewProducts(customer.id)}
           />
         )
     })
@@ -53,19 +59,6 @@ class CustomerManagement extends Component {
         this.setState({
           customers: data
         })
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
-  getRemoteCustomer(customerId) {
-
-    axios
-      .get(`http://localhost:4000/customers/${customerId}`)
-      .then(response => {
-          const {data} = response
-          console.log(data)
       })
       .catch(error => {
         console.log(error)

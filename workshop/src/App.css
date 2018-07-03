@@ -64,3 +64,11 @@ html, body, #root {
   background-color: #fafafb;
   border-bottom: 1px solid green;
 }
+
+.saleBox {
+  text-align: center;
+}
+
+.saleBox button {
+  margin-top: 10px;
+}

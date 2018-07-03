@@ -2,8 +2,6 @@ import React from 'react'
 import './Avatar.css'
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import CustomerManagement from './CustomerManagement';
-import Customer from './Customer'
-import axios from 'axios'
 import CustomerSave from './CustomerSave';
 import ProductManagement from './ProductManagement';
 import ProductSave from './ProductSave';
@@ -32,7 +30,7 @@ const Avatar = (props) => {
                         <Route exact path="/" component={CustomerManagement}/>
                         <Route exact path="/" component={CustomerManagement}/>
                         <Route path="/saveCustomer/:customerId?" component={CustomerSave}/>
-                        <Route exact path="/products" component={ProductManagement}/>
+                        <Route exact path="/products/:customerId?" component={ProductManagement}/>
                         <Route path="/saveProduct/:productId?" component={ProductSave}/>
                     </Switch>
                 </div>

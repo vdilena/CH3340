@@ -35,7 +35,7 @@ import axios from 'axios'
 						this.setState({
 							nameInput: data.name,
 							stockInput: data.stock,
-							categorySelect: data.category
+							categorySelect: data.CategoryId
 						})
 					})
 					.catch(error => {
@@ -111,6 +111,10 @@ import axios from 'axios'
 		
 		}
 
+		handleChange(event) {
+			this.setState({categorySelect: event.target.value});
+		}
+
 		render() {
 
 			return (
@@ -121,7 +125,7 @@ import axios from 'axios'
 							onChange={(event) => this.addName(event.target.value)} value={this.state.nameInput} />
 						<input placeholder = "Stock" 
 							onChange={(event) => this.addStock(event.target.value)} value={this.state.stockInput} />
-						<select value={this.state.categorySelect}>
+						<select value={this.state.categorySelect} onChange={(event) => this.handleChange(event)}>
 							<option value=''>-- Choose an Option --</option>
 							{this.getCategories()}
 						</select>

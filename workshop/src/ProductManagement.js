@@ -35,22 +35,8 @@ class ProductManagement extends Component {
 
   saleProductToCustomer(product, customerId) {
 
-    let customersByProduct = []
-
-    if(product.customers) {
-
-      product.customers.forEach(element => {
-        customersByProduct  = [...product.customers, { id: customerId} ]
-      })
-    } else {
-
-      customersByProduct = [{ id: customerId}]
-    }
-
-    product.customers = customersByProduct
-
     axios
-        .put(`http://localhost:4000/products/${product.id}`,product)
+        .post("http://localhost:4000/product_customer",{customerId: customerId, productId: product.id })
         .then(response => {
   
           this.props.history.push("/")
